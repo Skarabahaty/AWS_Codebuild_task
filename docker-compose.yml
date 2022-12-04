@@ -1,10 +1,15 @@
 version: 2.13.0
 services:
   nginx:
-    image: nginx
+    image: nginx:alpine
     ports:
       - 80:80
+    volumes:
+      - ~/nginx.conf:/etc/nginx/nginx.conf
+      
   apache:
-    image: apache
+    image: httpd:alpine
     ports:
       - 83:80
+    volumes:
+      - ~/apache:/etc/apache2
