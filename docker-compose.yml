@@ -1,11 +1,11 @@
 version: "3.0"
 services:
   nginx-compose:
-    build: ./nginx
+    build: ./nginx/
     ports:
       - "80:80"
       
   apache-compose:
-    image: ./apache
+    image: ./apache/
     ports:
       - "83:80"
