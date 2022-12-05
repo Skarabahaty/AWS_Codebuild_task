@@ -6,6 +6,6 @@ services:
       - "80:80"
       
   apache-compose:
-    image: ./apache/
+    build: ./apache/
     ports:
       - "83:80"
