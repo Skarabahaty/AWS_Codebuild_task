@@ -2,10 +2,12 @@ version: "3.0"
 services:
   nginx-compose:
     build: ./nginx/
+    image: skareg/nginx:latest
     ports:
       - "80:80"
       
   apache-compose:
     build: ./apache/
+    image: skareg/apache:latest
     ports:
       - "83:80"
