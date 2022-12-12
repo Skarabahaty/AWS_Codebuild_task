@@ -8,11 +8,12 @@ phases:
             - git --version
     pre_build:
         commands:
+            - service docker start
             - aws ecr-public get-login-password --region "us-east-1" | docker login --username AWS --password-stdin public.ecr.aws/i2k4g4y5
             - COMMIT_ID=$(git rev-parse --short HEAD)
     build:
         commands:
-            - docker build -t public.ecr.aws/i2k4g4y5/nginx:latest ./nginx
+            - docker build -t public.ecr.aws/i2k4  g4y5/nginx:latest ./nginx
             - docker build -t public.ecr.aws/i2k4g4y5/apache:latest ./apache
             - docker tag public.ecr.aws/i2k4g4y5/nginx:latest public.ecr.aws/i2k4g4y5/nginx:$COMMIT_ID
             - docker tag public.ecr.aws/i2k4g4y5/apache:latest public.ecr.aws/i2k4g4y5/apache:$COMMIT_ID
