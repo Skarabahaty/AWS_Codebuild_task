@@ -8,7 +8,7 @@ phases:
             - git --version
     pre_build:
         commands:
-            - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2k4g4y5
+            - aws ecr-public get-login-password --region "us-east-1" | docker login --username AWS --password-stdin public.ecr.aws/i2k4g4y5
             - COMMIT_ID=$(git rev-parse --short HEAD)
     build:
         commands:
