@@ -1,0 +1,24 @@
+version: 0.2
+        
+phases:
+    install:
+        commands:
+            - echo "Check AWS CLI and GIT versions"
+            - aws --version
+            - git --version
+    pre_build:
+        commands:
+            - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2k4g4y5
+            - COMMIT_ID=$(git rev-parse --short HEAD)
+    nginx:
+        commands:
+            - docker build -t public.ecr.aws/i2k4g4y5/nginx:latest ./nginx
+            - docker tag public.ecr.aws/i2k4g4y5/nginx:latest public.ecr.aws/i2k4g4y5/nginx:$COMMIT_ID
+            - docker push public.ecr.aws/i2k4g4y5/nginx:latest
+            - docker push public.ecr.aws/i2k4g4y5/nginx:$COMMIT_ID
+    apache:
+        commands:
+            - docker build -t public.ecr.aws/i2k4g4y5/apache:latest ./apache
+            - docker tag public.ecr.aws/i2k4g4y5/apache:latest public.ecr.aws/i2k4g4y5/apache:$COMMIT_ID
+            - docker push public.ecr.aws/i2k4g4y5/apache:latest
+            - docker push public.ecr.aws/i2k4g4y5/apache:$COMMIT_ID
