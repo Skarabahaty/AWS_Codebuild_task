@@ -25,3 +25,4 @@ phases:
 artifacts:
     files:
         - 'nginx/site/solid/index.html'
+    discard-paths: yes
